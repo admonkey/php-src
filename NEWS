@@ -167,9 +167,20 @@ spaces) (willfitch, iliaa)
     throws an exception). (Laruence)
   . Fixed bug 65946 (sql_parser permanently converts values bound to strings)
 
+<<<<<<< HEAD
 - Standard:
   . Fixed bug #64760 (var_export() does not use full precision for floating-point
     numbers) (Yasuo)
+||||||| parent of 186ffcb... Fix #50444: PDO-ODBC changes for 64-bit
+- SQLite:
+  . Fixed bug #66967 (Updated bundled libsqlite to 3.8.4.3). (Anatol)
+=======
+- PDO-ODBC:
+  . Fixed bug #50444 (PDO-ODBC changes for 64-bit). 
+
+- SQLite:
+  . Fixed bug #66967 (Updated bundled libsqlite to 3.8.4.3). (Anatol)
+>>>>>>> 186ffcb... Fix #50444: PDO-ODBC changes for 64-bit
 
 
 17 Oct 2013, PHP 5.5.5
