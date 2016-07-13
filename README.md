@@ -1,3 +1,52 @@
+This is a custom build of php 5.5.9 to patch a PDO ODBC bug to prove [this answer](http://stackoverflow.com/a/38327719/4233593).
+
+Ubuntu 14.04 Installation
+=========================
+
+most of these commands will require sudo
+
+get dependencies
+
+    apt-get install make autoconf apache2-dev libfcgi-dev libfcgi0ldbl libjpeg62-dbg libmcrypt-dev libssl-dev libbz2-dev libjpeg-dev \
+        libfreetype6-dev libpng12-dev libxpm-dev libxml2-dev libpcre3-dev libbz2-dev libcurl4-openssl-dev \
+        libjpeg-dev libpng12-dev libxpm-dev libfreetype6-dev libmysqlclient-dev libt1-dev libgd2-xpm-dev \
+        libgmp-dev libsasl2-dev libmhash-dev unixodbc-dev freetds-dev libpspell-dev libsnmp-dev libtidy-dev \
+        libxslt1-dev libmcrypt-dev libdb5.3-dev -y
+
+must use old version of bison <= 2.7
+
+    wget http://launchpadlibrarian.net/140087283/libbison-dev_2.7.1.dfsg-1_amd64.deb
+    wget http://launchpadlibrarian.net/140087282/bison_2.7.1.dfsg-1_amd64.deb
+    dpkg -i libbison-dev_2.7.1.dfsg-1_amd64.deb
+    dpkg -i bison_2.7.1.dfsg-1_amd64.deb
+    apt-mark hold libbison-dev
+    apt-mark hold bison
+
+compile and install
+
+    ./buildconf --force
+
+    ./configure --with-apxs2=/usr/bin/apxs2 --with-pdo-odbc=unixODBC,/usr/
+
+    make
+
+    make test
+
+    make install
+
+load apache
+
+    cp php.ini-development /usr/local/php/php.ini
+
+    nano /etc/apache2/apache2.conf
+
+add these lines to the `apache2.conf`
+
+    # pre-process php files
+    AddType application/x-httpd-php .php
+    PHPIniDir /usr/local/php
+
+
 The PHP Interpreter
 ===================
 
